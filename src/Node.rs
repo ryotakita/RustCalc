@@ -1,3 +1,4 @@
+#![allow(non_snake_case)]
 /// ```
 /// let Dis = calcDistance(nodeThis, nodeTar);
 /// ````
@@ -8,12 +9,21 @@ pub fn calcDistance(node1: &Node, node2: &Node) -> f64
     (disX.powf(2.) + disY.powf(2.)).powf(0.5) 
 }
 
+/// 節点を新しく生成します。
+/// ```
+/// let node = createNode(0., 0.)
+/// ```
+pub fn createNode(xtmp: f64, ytmp: f64) -> Node
+{
+    Node{x:xtmp, y:ytmp}
+}
+
 /// ```
 /// let node = Node{x:0., y:0.};
 /// ```
 pub struct Node {
-    pub x: f64,
-    pub y: f64
+    x: f64,
+    y: f64
 }
 
 impl Node{
@@ -26,15 +36,14 @@ impl Node{
     }
 }
 
-/// テスト実行
 #[test]
 fn structNode_test()
 {
-    let node = Node{x:0.,y:0.};
+    let node = createNode(0., 0.);
     assert_eq!(node.x, 0.);
     assert_eq!(node.y, 0.);
 
-    let nodeTar = Node{x:3.,y:4.};
+    let nodeTar = createNode(3., 4.);
     assert_eq!(nodeTar.x, 3.);
     assert_eq!(nodeTar.y, 4.);
 
