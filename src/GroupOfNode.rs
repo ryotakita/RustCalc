@@ -1,6 +1,9 @@
 #![allow(non_snake_case)]
 /// ```
-/// let Dis = calcDistance(nodeThis, nodeTar);
+/// use CalcArc::GroupOfNode;
+/// let nodeThis = GroupOfNode::createNode(0., 0.);
+/// let nodeTar = GroupOfNode::createNode(3., 4.);
+/// let Dis = GroupOfNode::calcDistance(&nodeThis, &nodeTar);
 /// ````
 pub fn calcDistance(node1: &Node, node2: &Node) -> f64
 {
@@ -9,25 +12,28 @@ pub fn calcDistance(node1: &Node, node2: &Node) -> f64
     (disX.powf(2.) + disY.powf(2.)).powf(0.5) 
 }
 
-/// 節点を新しく生成します。
+/// createNode
 /// ```
-/// let node = createNode(0., 0.)
+/// use CalcArc::GroupOfNode;
+/// let node = GroupOfNode::createNode(0., 0.);
 /// ```
 pub fn createNode(xtmp: f64, ytmp: f64) -> Node
 {
     Node{x:xtmp, y:ytmp}
 }
 
-/// ```
-/// let node = Node{x:0., y:0.};
-/// ```
+/// Node has X & Y
 pub struct Node {
     x: f64,
     y: f64
 }
 
 impl Node{
+    /// calculate distance to other node
     /// ```
+    /// use CalcArc::GroupOfNode;
+    /// let nodeThis = GroupOfNode::createNode(0., 0.);
+    /// let nodeTarget = GroupOfNode::createNode(3., 4.);
     /// let dis = nodeThis.getDistanceTo(&nodeTarget);
     /// ```
     pub fn getDistanceTo(&self, nodeTar: &Node) -> f64
