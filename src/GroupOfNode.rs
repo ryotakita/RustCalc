@@ -1,4 +1,8 @@
 #![allow(non_snake_case)]
+use plotlib::page::Page;
+use plotlib::scatter::{Scatter, Style};
+use plotlib::style::Point;
+use plotlib::view::ContinuousView;
 /// ```
 /// use CalcArc::GroupOfNode;
 /// let nodeThis = GroupOfNode::createNode(0., 0.);
@@ -41,6 +45,16 @@ impl Node{
     {
         ((self.x - nodeTar.x).abs().powf(2.) + (self.y - nodeTar.y).abs().powf(2.)).powf(0.5)
     }
+
+    pub fn getX(&self) -> f64
+    {
+        self.x
+    }
+
+    pub fn getY(&self) -> f64
+    {
+        self.y
+    }
 }
 
 /// manegeNodeGroup
@@ -77,9 +91,33 @@ impl NodeGroup{
         }
     }
 
-    pub fn findNode(&self) -> &Node{
-        self.nodeGroup.get(0).unwrap()
+    pub fn findNodeByPt(&self, x: f64, y:f64) -> &Node{
+        self.nodeGroup.iter().find(|&node| node.getX() == x && node.getY() == y).unwrap()
     }
+
+    pub fn getNodeGroup(&self) -> &Vec<Node>{
+        &self.nodeGroup
+    }
+    pub fn createSVG(&self){
+        let vec = self.getNodeGroup();
+        let mut vec2 :Vec<(f64, f64)> = vec![];
+        for i in vec{
+            vec2.push((i.getX(), i.getY()));
+        }
+        let s = Scatter::from_slice(&vec2).style(
+            Style::new().colour("#35C788"),
+        );
+
+        let v = ContinuousView::new()
+            .add(&s)
+            .x_range(-5., 10.)
+            .y_range(-2., 6.)
+            .x_label("x")
+            .y_label("y");
+
+        Page::single(&v).save("Node.svg").unwrap();
+    }
+
 }
 
 
