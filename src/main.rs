@@ -1,11 +1,21 @@
 #![allow(non_snake_case)]
 use CalcArc::GroupOfNode;
 use CalcArc::GroupOfBeam;
+use CalcArc::RCParse;
 fn main() {
-    let node1 = GroupOfNode::createNode(0., 0.);
-    let node2 = GroupOfNode::createNode(3., 4.);
-    println!("distance is {}", node1.getDistanceTo(&node2));
 
-    let beam = GroupOfBeam::createBeam(node1, node2);
-    println!("distance is {}" , beam.getLength())
+    let fileInput = "input.txt";
+    let mut nodeGroup = GroupOfNode::createNodeGroup();
+
+    let lstGirderInput = RCParse::parseOfGirder(fileInput);
+    for ParamGirder in lstGirderInput{
+        let BeamXY: Vec<&str> = ParamGirder.split(',').collect();
+        GroupOfNode::createNode(BeamXY[0].parse().unwrap(), BeamXY[1].parse().unwrap(), &mut nodeGroup);
+        GroupOfNode::createNode(BeamXY[2].parse().unwrap(), BeamXY[3].parse().unwrap(), &mut nodeGroup);
+    }
+
+    nodeGroup.showGroup();
+    println!("{}",nodeGroup.findNode().getDistanceTo(nodeGroup.findNode()))
+
+    
 }

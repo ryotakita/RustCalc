@@ -17,9 +17,10 @@ pub fn calcDistance(node1: &Node, node2: &Node) -> f64
 /// use CalcArc::GroupOfNode;
 /// let node = GroupOfNode::createNode(0., 0.);
 /// ```
-pub fn createNode(xtmp: f64, ytmp: f64) -> Node
+pub fn createNode(xtmp: f64, ytmp: f64, nodeGroup: &mut NodeGroup)
 {
-    Node{x:xtmp, y:ytmp}
+    let node = Node{x:xtmp, y:ytmp};
+    nodeGroup.addGroup(node);
 }
 
 /// Node has X & Y
@@ -41,6 +42,46 @@ impl Node{
         ((self.x - nodeTar.x).abs().powf(2.) + (self.y - nodeTar.y).abs().powf(2.)).powf(0.5)
     }
 }
+
+/// manegeNodeGroup
+/// ```
+/// use CalcArc::GroupOfNode;
+/// let nodeThis = GroupOfNode::createNode(0., 0.);
+/// let nodeTarget = GroupOfNode::createNode(3., 4.);
+/// let dis = nodeThis.getDistanceTo(&nodeTarget);
+/// ```
+pub struct NodeGroup{
+    nodeGroup: Vec<Node> 
+}
+
+pub fn createNodeGroup() -> NodeGroup{
+    NodeGroup{nodeGroup: Vec::new()}
+}
+
+impl NodeGroup{
+    /// calculate distance to other node
+    /// ```
+    /// use CalcArc::GroupOfNode;
+    /// let nodeThis = GroupOfNode::createNode(0., 0.);
+    /// let nodeTarget = GroupOfNode::createNode(3., 4.);
+    /// let dis = nodeThis.getDistanceTo(&nodeTarget);
+    /// ```
+    pub fn addGroup(&mut self, node: Node) 
+    {
+        self.nodeGroup.push(node);
+    }
+
+    pub fn showGroup(&self){
+        for i in &self.nodeGroup{
+            println!("x:{}, y:{}",i.x, i.y);
+        }
+    }
+
+    pub fn findNode(&self) -> &Node{
+        self.nodeGroup.get(0).unwrap()
+    }
+}
+
 
 #[test]
 fn structNode_test()
