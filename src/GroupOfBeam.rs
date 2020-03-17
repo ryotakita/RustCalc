@@ -10,17 +10,17 @@ use plotlib::view::ContinuousView;
 /// ```
 /// let beam = createBeam(nodeI, nodeJ)
 /// ````
-pub fn createBeam(IxIn: f64, IyIn: f64, JxIn: f64, JyIn: f64, grp: &mut BeamGroup) {
+pub fn createBeam(IxIn: i64, IyIn: i64, JxIn: i64, JyIn: i64, grp: &mut BeamGroup) {
     let beam = Beam{ Ix: IxIn , Iy: IyIn, Jx:JxIn, Jy:JyIn };
     grp.addGroup(beam);
 }
 
 /// beam component has node-I & node-J
 pub struct Beam{
-    Ix : f64,
-    Iy : f64,
-    Jx : f64,
-    Jy : f64
+    Ix : i64,
+    Iy : i64,
+    Jx : i64,
+    Jy : i64
 }
 
 impl Beam{
@@ -60,8 +60,8 @@ impl BeamGroup{
         let vec = self.getBeamGroup();
         let mut vec2 :Vec<(f64, f64)> = vec![];
         for i in vec{
-            vec2.push((i.Ix, i.Iy));
-            vec2.push((i.Jx, i.Jy));
+            vec2.push((i.Ix as f64, i.Iy as f64));
+            vec2.push((i.Jx as f64, i.Jy as f64));
         }
         let s = Line::new(&vec2[..]);
 

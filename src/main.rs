@@ -25,8 +25,8 @@ fn main() {
     }
 
     nodeGroup.showGroup();
-    nodeGroup.createSVG();
-    beamGroup.createSVG();
+    //nodeGroup.createSVG();
+    //beamGroup.createSVG();
 
     
 }
