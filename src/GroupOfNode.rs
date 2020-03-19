@@ -30,11 +30,26 @@ pub fn createNode(xtmp: i64, ytmp: i64, nodeGroup: &mut NodeGroup)
     nodeGroup.addGroup(node);
 }
 
+pub fn createPt(xtmp: i64, ytmp: i64) -> Pt{
+    Pt{x: xtmp, y: ytmp}
+}
+
 // Pt has X & Y
 #[derive(PartialEq, Eq, Hash,Clone, Copy)]
 pub struct Pt{
     x: i64,
     y: i64
+}
+
+impl Pt{
+
+    pub fn getX(&self) -> i64{
+        self.x
+    }
+
+    pub fn getY(&self) -> i64{
+        self.y
+    }
 }
 
 /// Node has X & Y

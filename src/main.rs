@@ -19,9 +19,11 @@ fn main() {
         let Iy = BeamXY[1].parse().unwrap();
         let Jx = BeamXY[2].parse().unwrap();
         let Jy = BeamXY[3].parse().unwrap();
+        let ptI = GroupOfNode::createPt(Ix, Iy);
+        let ptJ = GroupOfNode::createPt(Jx, Jy);
         GroupOfNode::createNode(Ix, Iy, &mut nodeGroup);
         GroupOfNode::createNode(Jx, Jy, &mut nodeGroup);
-        GroupOfBeam::createBeam(Ix, Iy, Jx, Jy, &mut beamGroup);
+        GroupOfBeam::createBeam(ptI, ptJ, &mut beamGroup);
     }
 
     nodeGroup.showGroup();
