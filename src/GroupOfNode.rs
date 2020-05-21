@@ -123,6 +123,7 @@ impl NodeGroup{
     /// ## Assert
     /// - 現在は直接プリントしていますが、将来的にはリストを渡します。
     pub fn showGroup(&self){
+        println!("節点一覧：");
         for (k,v) in &self.nodeGroup{
             println!("{:?}", k);
         }

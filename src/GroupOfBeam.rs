@@ -3,12 +3,15 @@ use crate::GroupOfNode::*;
 /// ```
 /// let beam = createBeam(nodeI, nodeJ)
 /// ````
-pub fn createBeam(PtIin: Pt, PtJin: Pt, grp: &mut BeamGroup) {
+pub fn createBeam(PtIin: Pt, PtJin: Pt, grp: &mut BeamGroup, grpNd: &mut NodeGroup) {
+    createNode(PtIin.getX(), PtIin.getY(), grpNd);
+    createNode(PtJin.getX(), PtJin.getY(), grpNd);
     let beam = Beam{ptI: PtIin, ptJ: PtJin};
     grp.addGroup(beam);
 }
 
 /// beam component has node-I & node-J
+#[derive(Debug)]
 pub struct Beam{
     ptI : Pt,
     ptJ : Pt
@@ -37,9 +40,9 @@ impl BeamGroup{
     }
 
     pub fn showGroup(&self){
-        println!("梁の一覧を出力します。");
+        println!("梁一覧：");
         for i in &self.beamGroup{
-            println!("Ix:{}, Iy:{}, Jx:{}, Jy:{}",i.ptI.getX(), i.ptI.getY(), i.ptJ.getX(), i.ptJ.getY());
+            println!("{:?}", i);
         }
     }
 

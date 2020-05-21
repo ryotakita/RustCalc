@@ -17,6 +17,13 @@ pub fn parseOfGirder(filename: &str) -> Vec<String>
     // Read the file line by line using the lines() iterator from std::io::BufRead.
     for (index, line) in reader.lines().enumerate() {
         let line = line.unwrap(); // Ignore errors.
+        let lstParam: Vec<&str> = line.split(',').collect();
+        match lstParam.len(){
+            3 => (),
+            4 => (),
+            _ => panic!("input data is not collect line:{}", index+1)
+        }
+
         // Show the line and its number.
         lstGirder.push(line);
     }

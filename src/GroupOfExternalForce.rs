@@ -52,7 +52,7 @@ impl ForceGroup{
     /// ## Assert
     /// - 現在は直接プリントしていますが、将来的にはリストを渡します。
     pub fn showGroup(&self){
-        println!("外力の一覧を出力します。");
+        println!("外力一覧：");
         for i in &self.forceGroup{
             println!("{:?}", i)
         }

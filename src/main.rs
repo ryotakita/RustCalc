@@ -1,5 +1,6 @@
 #![allow(non_snake_case)]
 use plotlib::page::Page;
+use std::io;
 use plotlib::scatter::{Scatter, Style};
 use plotlib::style::Point;
 use plotlib::view::ContinuousView;
@@ -23,9 +24,7 @@ fn main() {
         let Jy = vec[3].parse().unwrap();
         let ptI = GroupOfNode::createPt(Ix, Iy);
         let ptJ = GroupOfNode::createPt(Jx, Jy);
-        GroupOfNode::createNode(Ix, Iy, &mut nodeGroup);
-        GroupOfNode::createNode(Jx, Jy, &mut nodeGroup);
-        GroupOfBeam::createBeam(ptI, ptJ, &mut beamGroup);
+        GroupOfBeam::createBeam(ptI, ptJ, &mut beamGroup, &mut nodeGroup);
     };
     let mut parthOfForce = |vec: &Vec<&str>| {
         let x = match vec[0].parse(){
@@ -44,7 +43,6 @@ fn main() {
                 panic!("error:{}", error),
         };
 
-        let pt = GroupOfNode::createPt(x, y);
         GroupOfExternalForce::createForce(x, y, f, &mut forceGroup);
     };
 
@@ -71,10 +69,11 @@ fn main() {
 
 
 
-    //nodeGroup.showGroup();
-    //beamGroup.showGroup();
-    forceGroup.showGroup();
     nodeGroup.showGroup();
+    beamGroup.showGroup();
+    forceGroup.showGroup();
+    let mut guess = String::new();
+    io::stdin().read_line(&mut guess);
     //nodeGroup.createSVG();
     //beamGroup.createSVG();
 
